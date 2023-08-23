@@ -24,7 +24,7 @@ function binarySearch(list, target){
             index = middle;
         } else if (list[middle] > target){
             right = middle - 1;
-        }   else {
+        } else {
             left = middle + 1;
         }
     }
@@ -33,6 +33,40 @@ function binarySearch(list, target){
 
 //returnere 1 hvis tallet findes, returnere -1 hvis tallet ikke findes
 console.log(binarySearch(list1,"b"))
+
+
+
+let listOne = [1,3,5,7]
+let listTwo = [2,3,4,8,10]
+
+
+function totalFlet(list1, list2){
+    let listToAdd = [];
+    let i1 = 0;
+    let i2 = 0;
+    while (i1 < list1.length && i2 < list2.length){
+        if (list1[i1] < list2[i2]){
+            listToAdd.push(list1[i1]);
+            i1++;   
+        }
+        else{
+            listToAdd.push(list2[i2]);
+            i2++;
+        }
+    }
+    while(i1 < list1.length){
+        listToAdd.push(list1[i1])
+        i1++;
+    }
+    while(i2 < list2.length){
+        listToAdd.push(list2[i2]);
+        i2++;
+    }
+    return listToAdd;
+
+}
+
+console.log(totalFlet(listOne,listTwo));
 
 
 
