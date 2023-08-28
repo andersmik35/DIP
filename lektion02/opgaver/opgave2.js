@@ -157,7 +157,7 @@ const persons = [
   {
     name: "Gustav",
     email: "gustav@gmail.com",
-    tlfnr: "12345678"
+    tlfnr: "12345678",
   },
   {
     name: "Mads",
@@ -171,4 +171,82 @@ const persons = [
   },
 ];
 
-console.log(persons);
+console.log(JSON.stringify(persons));
+
+//Sletter person 1
+delete persons[1];
+persons[0].email = "imUWU@gmail.com";
+
+persons[3] = {
+  name: "Emil",
+  email: "emil@gmail.com",
+  tlfnr: "12345678",
+};
+
+console.log("");
+console.log(JSON.stringify(persons));
+
+console.log("");
+console.log("Opgave 2.6:");
+
+const symbols = "{[]}";
+
+function checkSymbols(symbols) {
+  const stack = [];
+  for (let i = 0; i < symbols.length; i++) {
+    const symbol = symbols[i];
+    if (symbol === "{" || symbol === "[" || symbol === "(") {
+      stack.push(symbol);
+    } else if (symbol === "}" || symbol === "]" || symbol === ")") {
+      if (stack.length === 0) {
+        return false;
+      }
+      const last = stack.pop();
+      if (
+        (symbol === "}" && last !== "{") ||
+        (symbol === "]" && last !== "[") ||
+        (symbol === ")" && last !== "(")
+      ) {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}
+
+console.log(checkSymbols(symbols));
+
+console.log("");
+console.log("Opgave 2.7:");
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+numbers.max = function () {
+  let max = this[0];
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] > max) {
+      max = this[i];
+    }
+  }
+  return max;
+};
+
+numbers.contains = function (element) {
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === element) {
+      return true;
+    }
+  }
+  return false;
+};
+
+numbers.sum = function () {
+  let sum = 0;
+  for (let i = 0; i < this.length; i++) {
+    sum += this[i];
+  }
+  return sum;
+};
+
+console.log("Det største tal i arrayet er " + numbers.max());
+console.log("Indeholder array tallet 5? " + numbers.contains(5));
+console.log("Summen af arrayet er: " + numbers.sum());
