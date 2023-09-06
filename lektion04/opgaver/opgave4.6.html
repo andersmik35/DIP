@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountains</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+            border: 2px solid blue; 
+        }
+        
+        th, td {
+            border: 1px solid blue;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mountains</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Height (meters)</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody id="mountainTableBody">
+        </tbody>
+    </table>
+
+    <script>
+        const MOUNTAINS = [
+            { name: "Kilimanjaro", height: 5895, place: "Tanzania" },
+            { name: "Everest", height: 8848, place: "Nepal" },
+            { name: "Mount Fuji", height: 3776, place: "Japan" },
+            { name: "Vaalserberg", height: 323, place: "Netherlands" },
+            { name: "Denali", height: 6168, place: "United States" },
+            { name: "Popocatepetl", height: 5465, place: "Mexico" },
+            { name: "Mont Blanc", height: 4808, place: "Italy/France" }
+        ];
+
+        const mountainTableBody = document.getElementById("mountainTableBody");
+
+        MOUNTAINS.forEach(mountain => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${mountain.name}</td>
+                <td>${mountain.height}</td>
+                <td>${mountain.place}</td>
+            `;
+            mountainTableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
