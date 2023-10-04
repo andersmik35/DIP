@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        #ur {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stopur</h1>
+    <div id="ur">0.00</div>
+    <div id="millisekunder">0 millisekunder</div>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="nulstil">Nulstil</button>
+
+    <script>
+        let timerId;
+        let startTid;
+        let nuTid;
+        let forløbetTid = 0;
+
+        function updateClock() {
+            nuTid = new Date();
+            forløbetTid = nuTid - startTid;
+            const urElement = document.getElementById("ur");
+            urElement.innerText = formatTid(forløbetTid);
+
+            const millisekunderElement = document.getElementById("millisekunder");
+            millisekunderElement.innerText = forløbetTid + " millisekunder";
+        }
+
+        function formatTid(tid) {
+            const sekunder = Math.floor(tid / 1000);
+            const millisekunder = tid % 1000;
+            return `${sekunder}.${millisekunder}`;
+        }
+
+        document.getElementById("start").addEventListener("click", function () {
+            if (!timerId) {
+                startTid = new Date();
+                timerId = setInterval(updateClock, 10); // Opdater hvert 10. millisekund for mere præcis tid
+            }
+        });
+
+        document.getElementById("stop").addEventListener("click", function () {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        });
+
+        document.getElementById("nulstil").addEventListener("click", function () {
+            clearInterval(timerId);
+            timerId = null;
+            forløbetTid = 0;
+            startTid = null;
+            const urElement = document.getElementById("ur");
+            urElement.innerText = "0:00";
+
+            const millisekunderElement = document.getElementById("millisekunder");
+            millisekunderElement.innerText = "0 millisekunder";
+        });
+    </script>
+</body>
+</html>
