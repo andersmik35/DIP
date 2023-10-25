@@ -1,0 +1,18 @@
+html
+    head 
+        title Random User API
+    body
+        h1 Random User API
+        table
+            thead 
+                tr 
+                    th Name 
+                    th Age 
+                    th Gender 
+            tbody
+                each user in users 
+                    tr 
+                        td= user.name.first + " " + user.name.last
+                        td= user.dob.age
+                        td= user.gender
+
