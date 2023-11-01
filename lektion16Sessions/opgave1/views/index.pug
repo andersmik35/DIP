@@ -1,0 +1,44 @@
+h1 Indkøbsliste
+ul
+  each produkt in produkter
+    li= `${produkt.navn} - Pris: ${produkt.pris} DKK`
+    button(onclick=`clickfunction("${produkt.id}")`) Tilføj til kurv
+
+if valgteProdukter.length > 0
+  h2 Din indkøbskurv
+  ul
+    each produkt in valgteProdukter
+      li= `${produkt.navn} - Pris: ${produkt.pris} DKK`
+
+
+
+
+script.
+  async function post(url, objekt) {
+    const respons = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(objekt),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (respons.status !== 201){ 
+      console.log("Fejl her: " + respons.status);
+      throw new Error(respons.status);
+    }
+    return await respons.text();
+  }
+  
+
+  let clickfunction = async (id) => {
+    try {
+        // Udfør POST-anmodning med produktets id til /buy-stien
+        const result = await post('/buy', { id: id });
+        console.log(result); // Log resultatet fra POST-anmodningen
+        // Du kan udføre yderligere handlinger her, hvis nødvendigt
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
+
