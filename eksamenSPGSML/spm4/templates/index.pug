@@ -1,0 +1,19 @@
+doctype html
+html
+    head
+        title #{title}
+        script(src='index.js')
+    body
+        input(type="text", id="navn")
+        input(type="text", id="adresse")
+        button(onclick="tilføjPerson()") Tilføj person
+        table 
+            thead
+                tr
+                    th Navn
+                    th Adresse
+            tbody
+                each person in personer
+                    tr
+                        td #{person.navn}
+                        td #{person.adresse}
